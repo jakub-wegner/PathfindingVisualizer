@@ -1,0 +1,3 @@
+[submodule "Packages/com.jakubwegner.uiengine"]
+	path = Packages/com.jakubwegner.uiengine
+	url = https://github.com/jakub-wegner/UIEngine.git
