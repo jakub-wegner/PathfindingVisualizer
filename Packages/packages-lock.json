@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.jakubwegner.uiengine": {
+      "version": "file:com.jakubwegner.uiengine",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.8.26",
       "depth": 2,
