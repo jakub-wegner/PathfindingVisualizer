@@ -1,4 +1,5 @@
 ﻿<Solution>
   <Project Path="JakubWegner.UIEngine.Editor.csproj" />
   <Project Path="JakubWegner.UIEngine.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
 </Solution>
