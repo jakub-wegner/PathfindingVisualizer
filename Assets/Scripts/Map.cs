@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Map : MonoBehaviour {
-    private readonly int mapSize = 40;
+    private readonly int mapSize = 10;
 
     [SerializeField] private Material gridMaterial;
 
@@ -9,7 +9,9 @@ public class Map : MonoBehaviour {
         CreateMap();
     }
     public void CreateMap() {
-        float meshSize = mapSize * .5f + 5f;
+        transform.position = new Vector3(mapSize - 1, 0f, mapSize - 1) * .5f;
+
+        float meshSize = mapSize * .5f + 1f;
         Mesh mesh = new Mesh() {
             vertices = new Vector3[4] {
                 new Vector3(-meshSize, 0f, -meshSize),

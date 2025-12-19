@@ -4,7 +4,7 @@ Shader "Pathfinding/Grid"
     {
         _Color ("Color", Color) = (0.25, 0.8, 1, 1)
         _LineWidth ("Line Width", Range(0.0, 0.5)) = 0.02
-        _MapSize ("Map Size", float) = 40
+        _MapSize ("Map Size", float) = 10
         _EdgeFade ("Edge Fade", float) = 1
     }
 
@@ -65,9 +65,16 @@ Shader "Pathfinding/Grid"
                 float2 d = min(f, 1.0 - f);
                 float aa = fwidth(d.x) + fwidth(d.y);
 
+                float gridSize = _MapSize * .5;
+                float gridD = sdBox(p, float2(gridSize, gridSize));
+                float gridAA = fwidth(gridD);
+
                 float4 color = _Color;
-                color.a *= 1.0 - smoothstep(_LineWidth - aa, _LineWidth + aa, min(d.x, d.y));
-                color.a *= 1.0 - smoothstep(0, _EdgeFade, max(abs(p.x), abs(p.y)) - _MapSize * .5);
+                if (gridD < 0)
+                    color.a *= 1.0 - smoothstep(_LineWidth - aa, _LineWidth + aa, min(d.x, d.y));
+                else {
+                    color.a *= 1.0 - smoothstep(_LineWidth - gridAA, _LineWidth + gridAA, gridD);
+                }
 
                 return color;
             }
