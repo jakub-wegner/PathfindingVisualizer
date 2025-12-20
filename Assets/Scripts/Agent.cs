@@ -1,29 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Agent : MonoBehaviour {
     public static Agent Instance { get; private set; }
 
     private float speed = 8f;
-
-    private Vector3 targetPos;
+    private List<PathfindingNode> path;
 
     private void Awake() {
         Instance = this;
+        path = new List<PathfindingNode>();
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            targetPos = GetMousePos();
+        if (path.Count > 0) {
+            Vector3 targetPos = new Vector3(path[0].x, 0f, path[0].z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            if (transform.position == targetPos)
+                path.RemoveAt(0);
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
     }
 
-    private Vector3 GetMousePos() {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        new Plane(Vector3.up, Vector3.zero).Raycast(ray, out float d);
-        Vector3 pos = ray.GetPoint(d);
-        pos.x = Mathf.Round(pos.x);
-        pos.z = Mathf.Round(pos.z);
-        return pos;
+    public void SetPath(List<PathfindingNode> newPath) {
+        if (newPath == null)
+            path.RemoveRange(1, path.Count - 1);
+        else
+            path = newPath;
     }
 }

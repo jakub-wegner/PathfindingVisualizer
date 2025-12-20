@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Map : MonoBehaviour {
-    private readonly int mapSize = 10;
+    public static readonly int mapSize = 10;
 
     [SerializeField] private Material gridMaterial;
 
