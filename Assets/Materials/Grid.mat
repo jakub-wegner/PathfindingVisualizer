@@ -29,6 +29,6 @@ Material:
     - _LineWidth: 0.01
     - _MapSize: 10
     m_Colors:
-    - _Color: {r: 0.7484276, g: 0.7484276, b: 0.7484276, a: 1}
+    - _Color: {r: 0.40251565, g: 0.40251565, b: 0.40251565, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

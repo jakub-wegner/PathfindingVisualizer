@@ -1,16 +1,18 @@
 using UnityEngine;
 
 public class Map : MonoBehaviour {
+    public static Map Instance { get; private set; }
     private MapGrid MapGrid => MapGrid.Instance;
     private MapTiles MapTiles => MapTiles.Instance;
     private MapPath MapPath => MapPath.Instance;
 
     public static readonly int mapSize = 10;
 
-    private void Start() {
-        CreateMap();
+    private void Awake() {
+        Instance = this;
     }
-    public void CreateMap() {
+
+    public void Initialize() {
         transform.position = new Vector3(mapSize - 1, 0f, mapSize - 1) * .5f;
 
         float meshSize = mapSize * .5f + 100f;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 public class PathfindingNode {
     public int x;
     public int z;
+
+    public bool obstacle;
     public List<PathfindingNode> neighbors;
 
     public int index => z * Map.mapSize + x;

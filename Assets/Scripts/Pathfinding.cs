@@ -19,10 +19,6 @@ public class Pathfinding : MonoBehaviour {
         Instance = this;
     }
 
-    private void Start() {
-        Initialize();
-    }
-
     public void Initialize() {
         nodes = new PathfindingNode[Map.mapSize * Map.mapSize];
         for (int x = 0; x < Map.mapSize; x++)
@@ -30,6 +26,14 @@ public class Pathfinding : MonoBehaviour {
                 PathfindingNode node = new PathfindingNode(x, z);
                 nodes[z * Map.mapSize + x] = node;
             }
+    }
+    public void SetObstacles(List<Vector3> obstacles) {
+        foreach (PathfindingNode node in nodes)
+            node.obstacle = false;
+
+        foreach (Vector3 obstacle in obstacles)
+            GetNode(obstacle).obstacle = true;
+
         SetNeighbors_BFS();
     }
     public void SetNeighbors_BFS() {
@@ -37,12 +41,16 @@ public class Pathfinding : MonoBehaviour {
             for (int z = 0; z < Map.mapSize; z++) {
                 PathfindingNode node = nodes[z * Map.mapSize + x];
                 node.neighbors = new List<PathfindingNode>();
+                if (node.obstacle)
+                    continue;
                 // neighbors
                 void AddNeighbor(int x, int z) {
                     if (x >= 0 && x < Map.mapSize && z >= 0 && z < Map.mapSize) {
                         PathfindingNode neighbor = nodes[z * Map.mapSize + x];
-                        node.neighbors.Add(neighbor);
-                        neighbor.neighbors.Add(node);
+                        if (!neighbor.obstacle) {
+                            node.neighbors.Add(neighbor);
+                            neighbor.neighbors.Add(node);
+                        }
                     }
                 }
                 AddNeighbor(x, z - 1);
@@ -58,7 +66,7 @@ public class Pathfinding : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             MapTiles.Hide();
             MapPath.Hide();
-            if (hovered != null && currentNode == hovered) {
+            if (hovered != null && currentNode == hovered && path != null) {
                 currentNode = null;
                 Agent.SetPath(path);
             }
@@ -117,6 +125,8 @@ public class Pathfinding : MonoBehaviour {
             }
         }
 
+        MapTiles.Show(visitOrder);
+
         // no path
         if (target == null || !nodeStates.ContainsKey(target))
             return null;
@@ -131,8 +141,6 @@ public class Pathfinding : MonoBehaviour {
         path.Add(origin);
         path.Reverse();
 
-        // render
-        MapTiles.Show(visitOrder);
         MapPath.Show(path, visitIndex * MapTiles.materialStepDelay + MapTiles.materialFadeInDuration * .5f);
 
         return path;

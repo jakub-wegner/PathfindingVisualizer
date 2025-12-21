@@ -25,16 +25,16 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Blur: 0.15
+    - _Blur: 0.01
     - _FadeInDuration: 0.5
     - _MapSize: 10
     - _PathLength: 10
-    - _PathSize: 14
-    - _Size: -0.05
+    - _PathSize: 6
+    - _Size: 0.015
     - _Speed: 10
-    - _StartTime: 47.92593
+    - _StartTime: 66.40533
     - _StepDelay: 0.2
     m_Colors:
-    - _Color: {r: 0.6509433, g: 0.7864597, b: 1, a: 1}
+    - _Color: {r: 0.493671, g: 0.51539147, b: 0.6855345, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class Agent : MonoBehaviour {
     public static Agent Instance { get; private set; }
@@ -15,6 +17,14 @@ public class Agent : MonoBehaviour {
     private void Awake() {
         Instance = this;
         path = new List<PathfindingNode>();
+    }
+
+    public void Generate() {
+        Vector3 pos;
+        do {
+            pos = new Vector3(Random.Range(0, Map.mapSize), 0f, Random.Range(0, Map.mapSize));
+        } while (Pathfinding.GetNode(pos).obstacle);
+        transform.position = pos;
     }
 
     private void Update() {
