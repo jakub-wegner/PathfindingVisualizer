@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour {
     public static Pathfinding Instance { get; private set; }
+    private UI UI => UI.Instance;
     private MapTiles MapTiles => MapTiles.Instance;
     private MapPath MapPath => MapPath.Instance;
     private Agent Agent => Agent.Instance;
@@ -27,6 +28,12 @@ public class Pathfinding : MonoBehaviour {
                 nodes[z * Map.mapSize + x] = node;
             }
     }
+    public void Generate() {
+        currentNode = null;
+        MapTiles.Hide();
+        MapPath.Hide();
+    }
+
     public void SetObstacles(List<Vector3> obstacles) {
         foreach (PathfindingNode node in nodes)
             node.obstacle = false;
@@ -59,7 +66,7 @@ public class Pathfinding : MonoBehaviour {
     }
     
     private void Update() {
-        if (!Agent.idle)
+        if (UI.mouseOverUI || !Agent.idle)
             return;
 
         PathfindingNode hovered = GetCurrentNode();
@@ -72,7 +79,8 @@ public class Pathfinding : MonoBehaviour {
             }
             else {
                 currentNode = hovered;
-                path = CalculatePath_BFS();
+                if (currentNode != null)
+                    path = CalculatePath_BFS();
             }
         }
     }

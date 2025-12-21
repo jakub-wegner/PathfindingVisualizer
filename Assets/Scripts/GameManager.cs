@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         Map.Initialize();
         Pathfinding.Initialize();
+        NewLayout();
+    }
+
+    public void NewLayout() {
+        Pathfinding.Generate();
         Obstacles.Generate();
         Agent.Generate();
         CameraFollow.Generate();

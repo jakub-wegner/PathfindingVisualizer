@@ -27,7 +27,7 @@ Material:
     m_Floats:
     - _FadeInDuration: 0.5
     - _MapSize: 10
-    - _StartTime: 65.30533
+    - _StartTime: 9.672535
     - _StepDelay: 0.05
     m_Colors:
     - _Color: {r: 0.1984692, g: 0.20244005, b: 0.2830189, a: 1}
