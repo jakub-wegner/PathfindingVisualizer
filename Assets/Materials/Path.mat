@@ -29,10 +29,10 @@ Material:
     - _FadeInDuration: 0.5
     - _MapSize: 10
     - _PathLength: 10
-    - _PathSize: 16
+    - _PathSize: 5
     - _Size: 0.015
     - _Speed: 10
-    - _StartTime: 12.322535
+    - _StartTime: 2.84516
     - _StepDelay: 0.2
     m_Colors:
     - _Color: {r: 0.493671, g: 0.51539147, b: 0.6855345, a: 1}

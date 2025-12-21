@@ -79,7 +79,7 @@ public class Pathfinding : MonoBehaviour {
             }
             else {
                 currentNode = hovered;
-                if (currentNode != null)
+                if (currentNode != null && !currentNode.obstacle)
                     path = CalculatePath_BFS();
             }
         }
