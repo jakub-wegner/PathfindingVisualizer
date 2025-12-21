@@ -5,9 +5,10 @@ public class PathfindingNode {
     public int z;
     public List<PathfindingNode> neighbors;
 
+    public int index => z * Map.mapSize + x;
+
     public PathfindingNode(int x, int z) {
         this.x = x;
         this.z = z;
-        neighbors = new List<PathfindingNode>();
     }
 }

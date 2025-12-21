@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grid
-  m_Shader: {fileID: 4800000, guid: 4a7947fb788c2a94c9552842c4c3d7d2, type: 3}
+  m_Name: Tiles
+  m_Shader: {fileID: 4800000, guid: 775d81b919cc97b419e1bad16ccabffa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,10 +25,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _EdgeFade: 1
-    - _LineWidth: 0.01
+    - _FadeInDuration: 0.5
     - _MapSize: 10
+    - _StartTime: 47.92593
+    - _StepDelay: 0.05
     m_Colors:
-    - _Color: {r: 0.7484276, g: 0.7484276, b: 0.7484276, a: 1}
+    - _Color: {r: 0.1984692, g: 0.20244005, b: 0.2830189, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

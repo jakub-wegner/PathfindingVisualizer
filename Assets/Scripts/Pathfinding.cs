@@ -1,16 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pathfinding : MonoBehaviour {
+    public static Pathfinding Instance { get; private set; }
+    private MapTiles MapTiles => MapTiles.Instance;
+    private MapPath MapPath => MapPath.Instance;
     private Agent Agent => Agent.Instance;
 
     [SerializeField] private Camera cam;
 
-    private Coroutine pathfindingRoutine;
     private PathfindingNode currentNode;
 
     private PathfindingNode[] nodes;
+    Dictionary<PathfindingNode, PathfindingNodeState> nodeStates;
+    List<PathfindingNode> path;
+
+    private void Awake() {
+        Instance = this;
+    }
 
     private void Start() {
         Initialize();
@@ -22,7 +29,14 @@ public class Pathfinding : MonoBehaviour {
             for (int z = 0; z < Map.mapSize; z++) {
                 PathfindingNode node = new PathfindingNode(x, z);
                 nodes[z * Map.mapSize + x] = node;
-
+            }
+        SetNeighbors_BFS();
+    }
+    public void SetNeighbors_BFS() {
+        for (int x = 0; x < Map.mapSize; x++)
+            for (int z = 0; z < Map.mapSize; z++) {
+                PathfindingNode node = nodes[z * Map.mapSize + x];
+                node.neighbors = new List<PathfindingNode>();
                 // neighbors
                 void AddNeighbor(int x, int z) {
                     if (x >= 0 && x < Map.mapSize && z >= 0 && z < Map.mapSize) {
@@ -31,38 +45,31 @@ public class Pathfinding : MonoBehaviour {
                         neighbor.neighbors.Add(node);
                     }
                 }
-                //AddNeighbor(x - 1, z - 1);
                 AddNeighbor(x, z - 1);
                 AddNeighbor(x - 1, z);
-                //AddNeighbor(x - 1, z + 1);
             }
     }
     
     private void Update() {
-        PathfindingNode node = GetCurrentNode();
-        if (node != currentNode) {
-            if (pathfindingRoutine != null) {
-                StopCoroutine(pathfindingRoutine);
-                pathfindingRoutine = null;
+        if (!Agent.idle)
+            return;
+
+        PathfindingNode hovered = GetCurrentNode();
+        if (Input.GetMouseButtonDown(0)) {
+            MapTiles.Hide();
+            MapPath.Hide();
+            if (hovered != null && currentNode == hovered) {
+                currentNode = null;
+                Agent.SetPath(path);
             }
-            currentNode = node;
-            if (node != null)
-                pathfindingRoutine = StartCoroutine(PathfindingRoutine());
+            else {
+                currentNode = hovered;
+                path = CalculatePath_BFS();
+            }
         }
     }
 
-    private IEnumerator PathfindingRoutine() {
-        yield return new WaitForSeconds(.01f);
-        Debug.Log("start calculations");
-        List<PathfindingNode> path = CalculatePath_BFS();
-        Debug.Log("calculated");
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        Agent.SetPath(path);
-        Debug.Log("set path");
-        pathfindingRoutine = null;
-    }
-
-    private PathfindingNode GetNode(Vector3 pos) {
+    public PathfindingNode GetNode(Vector3 pos) {
         int x = Mathf.RoundToInt(pos.x);
         int z = Mathf.RoundToInt(pos.z);
 
@@ -77,18 +84,27 @@ public class Pathfinding : MonoBehaviour {
     }
 
     private List<PathfindingNode> CalculatePath_BFS() {
-        PathfindingNode origin = GetNode(Agent.transform.position);
+        PathfindingNode origin = Agent.node;
         PathfindingNode target = currentNode;
 
-        Dictionary<PathfindingNode, BFSNodeState> nodeStates = new Dictionary<PathfindingNode, BFSNodeState>();
+        nodeStates = new Dictionary<PathfindingNode, PathfindingNodeState>();
         Queue<PathfindingNode> queue = new Queue<PathfindingNode>();
 
-        queue.Enqueue(origin);
+        int[] visitOrder = new int[nodes.Length];
+        for (int i = 0; i < nodes.Length; i++)
+            visitOrder[i] = -1;
+        int visitIndex = 0;
+
         nodeStates[origin] = new BFSNodeState();
+        queue.Enqueue(origin);
+        visitOrder[origin.index] = 0;
 
         // BFS
         while (queue.Count > 0) {
             PathfindingNode current = queue.Dequeue();
+
+            visitOrder[current.index] = visitIndex;
+            visitIndex++;
 
             if (current == target)
                 break;
@@ -102,17 +118,22 @@ public class Pathfinding : MonoBehaviour {
         }
 
         // no path
-        if (!nodeStates.ContainsKey(target))
+        if (target == null || !nodeStates.ContainsKey(target))
             return null;
 
-        // create path
+        // path
         List<PathfindingNode> path = new List<PathfindingNode>();
         PathfindingNode node = target;
         while (node != origin) {
             path.Add(node);
             node = nodeStates[node].parent;
         }
+        path.Add(origin);
         path.Reverse();
+
+        // render
+        MapTiles.Show(visitOrder);
+        MapPath.Show(path, visitIndex * MapTiles.materialStepDelay + MapTiles.materialFadeInDuration * .5f);
 
         return path;
     }

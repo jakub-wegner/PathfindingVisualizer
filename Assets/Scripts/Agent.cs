@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour {
     public static Agent Instance { get; private set; }
+    private Pathfinding Pathfinding => Pathfinding.Instance;
 
-    private float speed = 8f;
+    private readonly float speed = 8f;
+
     private List<PathfindingNode> path;
+
+    public PathfindingNode node => Pathfinding.GetNode(transform.position);
+    public bool idle => path == null || path.Count == 0;
 
     private void Awake() {
         Instance = this;
@@ -13,7 +18,7 @@ public class Agent : MonoBehaviour {
     }
 
     private void Update() {
-        if (path.Count > 0) {
+        if (path != null && path.Count > 0) {
             Vector3 targetPos = new Vector3(path[0].x, 0f, path[0].z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
             if (transform.position == targetPos)
@@ -22,9 +27,6 @@ public class Agent : MonoBehaviour {
     }
 
     public void SetPath(List<PathfindingNode> newPath) {
-        if (newPath == null)
-            path.RemoveRange(1, path.Count - 1);
-        else
-            path = newPath;
+        path = newPath;
     }
 }

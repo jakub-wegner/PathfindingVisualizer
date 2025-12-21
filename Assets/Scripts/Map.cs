@@ -1,9 +1,11 @@
 using UnityEngine;
 
 public class Map : MonoBehaviour {
-    public static readonly int mapSize = 10;
+    private MapGrid MapGrid => MapGrid.Instance;
+    private MapTiles MapTiles => MapTiles.Instance;
+    private MapPath MapPath => MapPath.Instance;
 
-    [SerializeField] private Material gridMaterial;
+    public static readonly int mapSize = 10;
 
     private void Start() {
         CreateMap();
@@ -11,7 +13,7 @@ public class Map : MonoBehaviour {
     public void CreateMap() {
         transform.position = new Vector3(mapSize - 1, 0f, mapSize - 1) * .5f;
 
-        float meshSize = mapSize * .5f + 1f;
+        float meshSize = mapSize * .5f + 100f;
         Mesh mesh = new Mesh() {
             vertices = new Vector3[4] {
                 new Vector3(-meshSize, 0f, -meshSize),
@@ -31,11 +33,8 @@ public class Map : MonoBehaviour {
             },
         };
 
-        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
-        meshFilter.mesh = mesh;
-
-        MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
-        meshRenderer.material = gridMaterial;
-        gridMaterial.SetFloat("_MapSize", mapSize);
+        MapGrid.Initialize(mesh);
+        MapTiles.Initialize(mesh);
+        MapPath.Initialize(mesh);
     }
 }
