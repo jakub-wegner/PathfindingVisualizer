@@ -1,6 +1,7 @@
+using JakubWegner.UIEngine;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using JakubWegner.UIEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour {
     public static UI Instance { get; private set; }
@@ -34,6 +35,9 @@ public class UI : MonoBehaviour {
         }
         SetSpeed(1);
         SetAlgorithm(2);
+    }
+    public void StartMenu() {
+        SceneManager.LoadScene(0);
     }
 
     public void OpenSettings() {
