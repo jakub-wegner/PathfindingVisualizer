@@ -3,11 +3,13 @@ Shader "Map/Path"
     Properties
     {
         _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
-        _Speed ("Speed", float) = .2
-        _Size ("Size", float) = .1
-        _Blur ("Blur", float) = .1
+        _LineSize ("Line Size", float) = .1
+        _LineBlur ("Line Blur", float) = .1
 
         _MapSize ("Map Size", float) = 10
+
+        _FadeInSpeed ("Fade In Speed", float) = .2
+
         _PathSize ("Path Size", float) = 10
         _StartTime ("Start Time", float) = 10
     }
@@ -43,11 +45,13 @@ Shader "Map/Path"
             };
 
             float4 _Color;
-            float _Speed;
-            float _Size;
-            float _Blur;
+            float _LineSize;
+            float _LineBlur;
 
             float _MapSize;
+
+            float _FadeInSpeed;
+
             StructuredBuffer<float2> _Path;
             float _PathSize;
             float _StartTime;
@@ -84,9 +88,8 @@ Shader "Map/Path"
                 float2 p = i.positionWS.xz;
                 float time = _Time.y - _StartTime;
 
-                float l = _Speed * time;
-
                 float d = 10.0;
+                float l = _FadeInSpeed * time;
                 for (int i = 1; i < _PathSize; i++) {
                     if (l <= 0.0)
                         break;
@@ -95,7 +98,7 @@ Shader "Map/Path"
                 }
 
                 float4 color = _Color;
-                color.a *= 1.0 - smoothstep(_Size, _Size + _Blur, d);
+                color.a *= 1.0 - smoothstep(_LineSize, _LineSize + _LineBlur, d);
                 return color;
             }
             ENDHLSL

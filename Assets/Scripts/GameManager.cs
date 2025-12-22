@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
     private Map Map => Map.Instance;
     private Pathfinding Pathfinding => Pathfinding.Instance;
+    private UI UI => UI.Instance;
     private Obstacles Obstacles => Obstacles.Instance;
     private Agent Agent => Agent.Instance;
     private CameraFollow CameraFollow => CameraFollow.Instance;
@@ -10,13 +11,14 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         Map.Initialize();
         Pathfinding.Initialize();
+        UI.Initialize();
         GenerateNew();
     }
 
     public void GenerateNew() {
-        Pathfinding.Generate();
+        Pathfinding.ResetPathfinding();
         Obstacles.Generate();
-        Agent.Generate();
-        CameraFollow.Generate();
+        Agent.ResetAgent();
+        CameraFollow.ResetCamera();
     }
 }

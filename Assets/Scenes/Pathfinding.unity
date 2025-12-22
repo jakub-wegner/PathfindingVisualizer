@@ -708,6 +708,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 477152771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &477152773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 477152771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1 &495211290
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +995,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 732420653}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &732420655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 732420653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1 &733113659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1599,15 @@ MonoBehaviour:
   eventSystem: {fileID: 511160345}
   buttonsHolder: {fileID: 1818805378}
   settings: {fileID: 774455212}
+  speedButtons:
+  - {fileID: 2518745972361130530}
+  - {fileID: 732420655}
+  - {fileID: 1467373287}
+  - {fileID: 1952843547}
+  algorithmsButtons:
+  - {fileID: 1926575845}
+  - {fileID: 477152773}
+  - {fileID: 2106791089}
 --- !u!1001 &1161760176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1795,6 +1826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8f3393231e5444db83bebba192e35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapTiles
+  materialStepDelay: 0.05
+  materialFadeInDuration: 0.5
   tilesMaterial: {fileID: 2100000, guid: 877e892cb5ae73047be5574150fae567, type: 2}
 --- !u!1 &1423088127
 GameObject:
@@ -1967,6 +2000,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 1467373285}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1467373287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 1467373285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1 &1483676444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,6 +2605,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 1926575843}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1926575845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 1926575843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1001 &1952843545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2671,6 +2726,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 1952843545}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952843547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 1952843545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1 &2042299381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,6 +2984,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 2106791087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2106791089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 2106791087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1 &2142244057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,6 +3255,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1522550663388947207, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
   m_PrefabInstance: {fileID: 2518745972361130528}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2518745972361130530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6154046865219428175, guid: 142a7dd9ae4c5e446b3005b7383c5db1, type: 3}
+  m_PrefabInstance: {fileID: 2518745972361130528}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa70070c20c34a4082708fd8be0c11b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: JakubWegner.UIEngine.Runtime::JakubWegner.UIEngine.Button
 --- !u!1001 &5141150561749262231
 PrefabInstance:
   m_ObjectHideFlags: 0

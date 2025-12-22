@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour {
         Instance = this;
     }
 
-    public void Generate() {
+    public void ResetCamera() {
         transform.position = Agent.transform.position;
     }
 

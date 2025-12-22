@@ -18,7 +18,7 @@ public class Agent : MonoBehaviour {
         Instance = this;
     }
 
-    public void Generate() {
+    public void ResetAgent() {
         Vector3 pos;
         do {
             pos = new Vector3(Random.Range(0, Map.mapSize), 0f, Random.Range(0, Map.mapSize));
