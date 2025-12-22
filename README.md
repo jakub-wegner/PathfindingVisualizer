@@ -13,6 +13,13 @@ Assets/Scenes/Start.unity
 
 ---
 
+#### Unity Version
+
+- Unity 6.3  
+- Universal Render Pipeline (URP)
+
+---
+
 #### Algorithms
 
 The project includes three pathfinding algorithms:
@@ -106,7 +113,7 @@ https://jakub-wegner.itch.io/pathfinding-visualizer
 
 #### Technologies
 
-- Unity  
+- Unity 6.3  
 - C#  
 - HLSL  
 - Universal Render Pipeline (URP)  
