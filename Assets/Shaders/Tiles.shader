@@ -7,6 +7,7 @@ Shader "Map/Tiles"
         _FadeInDuration ("Fade In Duration", float) = .5
         _MapSize ("Map Size", float) = 10
         _StartTime ("Start time", float) = 10
+        _VisitTex ("Visit Texture", 2D) = "white" {}
     }
 
     SubShader
@@ -44,8 +45,10 @@ Shader "Map/Tiles"
             float _FadeInDuration;
 
             float _MapSize;
-            StructuredBuffer<float> _VisitOrder;
             float _StartTime;
+
+            TEXTURE2D(_VisitTex);
+            SAMPLER(sampler_VisitTex);
 
             Varyings vert (Attributes v)
             {
@@ -58,7 +61,6 @@ Shader "Map/Tiles"
             half4 frag (Varyings i) : SV_Target
             {
                 float2 p = i.positionWS.xz;
-                float time = _Time.y - _StartTime;
 
                 float x = round(p.x);
                 float y = round(p.y);
@@ -66,11 +68,14 @@ Shader "Map/Tiles"
                 if (x < 0.0 || x >= _MapSize || y < 0.0 || y >= _MapSize)
                     return float4(0.0, 0.0, 0.0, 0.0);
 
-                int index = y * _MapSize + x;
-                float order = _VisitOrder[index];
+                float2 uv = (float2(x, y) + .5) / _MapSize;
+
+                float order = SAMPLE_TEXTURE2D(_VisitTex, sampler_VisitTex, uv).r;
 
                 if (order < 0.0)
                     return float4(0.0, 0.0, 0.0, 0.0);
+
+                float time = _Time.y - _StartTime;
 
                 float4 color = _Color;
                 color.a *= smoothstep(0.0, _FadeInDuration, time - order * _StepDelay);

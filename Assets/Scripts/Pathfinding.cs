@@ -28,11 +28,11 @@ public class Pathfinding : MonoBehaviour {
     }
 
     public void Initialize() {
-        nodes = new PathfindingNode[Map.mapSize * Map.mapSize];
-        for (int x = 0; x < Map.mapSize; x++)
-            for (int z = 0; z < Map.mapSize; z++) {
+        nodes = new PathfindingNode[Map.size * Map.size];
+        for (int x = 0; x < Map.size; x++)
+            for (int z = 0; z < Map.size; z++) {
                 PathfindingNode node = new PathfindingNode(x, z);
-                nodes[z * Map.mapSize + x] = node;
+                nodes[z * Map.size + x] = node;
             }
     }
     public void ResetPathfinding() {
@@ -68,21 +68,21 @@ public class Pathfinding : MonoBehaviour {
     public void SetNeighbors() {
         bool diagonal = algorithm == Algorithm.AStar || algorithm == Algorithm.Dijkstra;
 
-        for (int x = 0; x < Map.mapSize; x++)
-            for (int z = 0; z < Map.mapSize; z++) {
-                PathfindingNode node = nodes[z * Map.mapSize + x];
+        for (int x = 0; x < Map.size; x++)
+            for (int z = 0; z < Map.size; z++) {
+                PathfindingNode node = nodes[z * Map.size + x];
                 node.neighbors = new List<PathfindingNode>();
 
                 if (node.obstacle)
                     continue;
 
                 void AddNeighbor(int x, int z) {
-                    if (x >= 0 && x < Map.mapSize && z >= 0 && z < Map.mapSize) {
-                        PathfindingNode neighbor = nodes[z * Map.mapSize + x];
+                    if (x >= 0 && x < Map.size && z >= 0 && z < Map.size) {
+                        PathfindingNode neighbor = nodes[z * Map.size + x];
                         if (neighbor.obstacle)
                             return;
                         if (node.x != x && node.z != z)
-                            if (nodes[node.z * Map.mapSize + x].obstacle || nodes[z * Map.mapSize + node.x].obstacle)
+                            if (nodes[node.z * Map.size + x].obstacle || nodes[z * Map.size + node.x].obstacle)
                                 return;
                         node.neighbors.Add(neighbor);
                         neighbor.neighbors.Add(node);
@@ -122,9 +122,9 @@ public class Pathfinding : MonoBehaviour {
         int x = Mathf.RoundToInt(pos.x);
         int z = Mathf.RoundToInt(pos.z);
 
-        if (x < 0 || x >= Map.mapSize || z < 0 || z >= Map.mapSize)
+        if (x < 0 || x >= Map.size || z < 0 || z >= Map.size)
             return null;
-        return nodes[z * Map.mapSize + x];
+        return nodes[z * Map.size + x];
     }
     private PathfindingNode GetCurrentNode() {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);

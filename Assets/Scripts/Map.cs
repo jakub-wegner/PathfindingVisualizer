@@ -6,16 +6,16 @@ public class Map : MonoBehaviour {
     private MapTiles MapTiles => MapTiles.Instance;
     private MapPath MapPath => MapPath.Instance;
 
-    public static readonly int mapSize = 10;
+    public static readonly int size = 10;
 
     private void Awake() {
         Instance = this;
     }
 
     public void Initialize() {
-        transform.position = new Vector3(mapSize - 1, 0f, mapSize - 1) * .5f;
+        transform.position = new Vector3(size - 1, 0f, size - 1) * .5f;
 
-        float meshSize = mapSize * .5f + 100f;
+        float meshSize = size * .5f + 100f;
         Mesh mesh = new Mesh() {
             vertices = new Vector3[4] {
                 new Vector3(-meshSize, 0f, -meshSize),

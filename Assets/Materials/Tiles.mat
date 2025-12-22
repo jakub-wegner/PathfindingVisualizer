@@ -22,13 +22,17 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _VisitTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FadeInDuration: 0.3
+    - _FadeInDuration: 0.1
     - _MapSize: 10
-    - _StartTime: 172.3664
-    - _StepDelay: 0.12
+    - _StartTime: 25.3025
+    - _StepDelay: 0.002
     m_Colors:
     - _Color: {r: 0.1984692, g: 0.20244005, b: 0.2830189, a: 1}
   m_BuildTextureStacks: []

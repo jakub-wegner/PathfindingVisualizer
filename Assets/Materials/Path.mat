@@ -22,12 +22,16 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _PathTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _Blur: 0.01
     - _FadeInDuration: 0.5
-    - _FadeInSpeed: 8
+    - _FadeInSpeed: 100
     - _LineBlur: 0.02
     - _LineSize: 0.02
     - _MapSize: 10
@@ -35,7 +39,7 @@ Material:
     - _PathSize: 11
     - _Size: 0.015
     - _Speed: 10
-    - _StartTime: 175.6364
+    - _StartTime: 25.3925
     - _StepDelay: 0.2
     m_Colors:
     - _Color: {r: 0.493671, g: 0.51539147, b: 0.6855345, a: 1}

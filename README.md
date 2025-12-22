@@ -100,7 +100,7 @@ The framework provides reusable components and state-based interaction handling 
 
 The project is also exported as a **WebGL build** and playable in a browser.
 
-*(Itch.io link to be added)*
+https://jakub-wegner.itch.io/pathfinding-visualizer
 
 ---
 

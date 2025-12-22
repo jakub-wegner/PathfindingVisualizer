@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class SimulationManager : MonoBehaviour {
     private Map Map => Map.Instance;
     private Pathfinding Pathfinding => Pathfinding.Instance;
     private UI UI => UI.Instance;

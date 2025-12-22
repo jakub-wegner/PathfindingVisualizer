@@ -22,7 +22,7 @@ public class MapPath : MonoBehaviour {
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = pathMaterial;
-        pathMaterial.SetFloat("_MapSize", Map.mapSize);
+        pathMaterial.SetFloat("_MapSize", Map.size);
 
     }
 
@@ -30,14 +30,18 @@ public class MapPath : MonoBehaviour {
         if (path == null)
             return;
 
-        Vector2[] bufferData = new Vector2[path.Count];
+        Texture2D pathTex = new Texture2D(path.Count, 1, TextureFormat.RGFloat, false, true);
+        pathTex.filterMode = FilterMode.Point;
+        pathTex.wrapMode = TextureWrapMode.Clamp;
+
+        Vector2[] points = new Vector2[path.Count];
         for (int i = 0; i < path.Count; i++)
-            bufferData[i] = new Vector2(path[i].x, path[i].z);
+            points[i] = new Vector2(path[i].x, path[i].z);
 
-        pathBuffer = new ComputeBuffer(path.Count, sizeof(float) * 2);
-        pathBuffer.SetData(bufferData);
+        pathTex.SetPixelData(points, 0);
+        pathTex.Apply(false, false);
 
-        pathMaterial.SetBuffer("_Path", pathBuffer);
+        pathMaterial.SetTexture("_PathTex", pathTex);
         pathMaterial.SetFloat("_PathSize", path.Count);
         pathMaterial.SetFloat("_StartTime", Time.time + delay);
 

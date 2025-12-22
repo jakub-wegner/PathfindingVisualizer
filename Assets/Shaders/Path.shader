@@ -12,6 +12,7 @@ Shader "Map/Path"
 
         _PathSize ("Path Size", float) = 10
         _StartTime ("Start Time", float) = 10
+        _PathTex ("Path Texture", 2D) = "white" {}
     }
 
     SubShader
@@ -52,9 +53,11 @@ Shader "Map/Path"
 
             float _FadeInSpeed;
 
-            StructuredBuffer<float2> _Path;
             float _PathSize;
             float _StartTime;
+
+            TEXTURE2D(_PathTex);
+            SAMPLER(sampler_PathTex);
 
             Varyings vert (Attributes v)
             {
@@ -64,6 +67,10 @@ Shader "Map/Path"
                 return o;
             }
 
+            float2 GetPathPoint(int index) {
+                float u = (index + .5) / _PathSize;
+                return SAMPLE_TEXTURE2D(_PathTex, sampler_PathTex, float2(u, .5)).rg;
+            }
             float distanceToSegment(float2 p, float2 a, float2 b) {
                 float2 ab = b - a;
                 float2 ap = p - a;
@@ -90,15 +97,18 @@ Shader "Map/Path"
 
                 float d = 10.0;
                 float l = _FadeInSpeed * time;
+                float2 prev = GetPathPoint(0);
                 for (int i = 1; i < _PathSize; i++) {
                     if (l <= 0.0)
                         break;
-                    d = min(d, distanceToClampedSegment(p, _Path[i - 1], _Path[i], l));
-                    l -= length(_Path[i] - _Path[i - 1]);
+                    float2 curr = GetPathPoint(i);
+                    d = min(d, distanceToClampedSegment(p, prev, curr, l));
+                    l -= length(curr - prev);
+                    prev = curr;
                 }
 
                 float4 color = _Color;
-                color.a *= 1.0 - smoothstep(_LineSize, _LineSize + _LineBlur, d);
+                color.a *=  1.0 - smoothstep(_LineSize, _LineSize + _LineBlur, d);
                 return color;
             }
             ENDHLSL

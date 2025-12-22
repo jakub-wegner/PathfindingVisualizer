@@ -3,12 +3,10 @@ using UnityEngine;
 public class MapTiles : MonoBehaviour {
     public static MapTiles Instance { get; private set; }
 
-    public float materialStepDelay;
-    public float materialFadeInDuration;
-
     [SerializeField] private Material tilesMaterial;
 
-    private ComputeBuffer visitOrderBuffer;
+    public float materialStepDelay;
+    public float materialFadeInDuration;
 
     private void Awake() {
         Instance = this;
@@ -21,29 +19,28 @@ public class MapTiles : MonoBehaviour {
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = tilesMaterial;
-        tilesMaterial.SetFloat("_MapSize", Map.mapSize);
+        tilesMaterial.SetFloat("_MapSize", Map.size);
     }
 
     public void Show(int[] visitOrder) {
-        float[] bufferData = new float[visitOrder.Length];
+        Texture2D visitTex = new Texture2D(Map.size, Map.size, TextureFormat.RFloat, false, true);
+        visitTex.filterMode = FilterMode.Point;
+        visitTex.wrapMode = TextureWrapMode.Clamp;
+
+        float[] pixels = new float[Map.size * Map.size];
         for (int i = 0; i < visitOrder.Length; i++)
-            bufferData[i] = visitOrder[i];
+            pixels[i] = visitOrder[i];
 
-        visitOrderBuffer = new ComputeBuffer(Map.mapSize * Map.mapSize, sizeof(float));
-        visitOrderBuffer.SetData(bufferData);
+        visitTex.SetPixelData(pixels, 0);
+        visitTex.Apply(false, false);
 
-        tilesMaterial.SetBuffer("_VisitOrder", visitOrderBuffer);
+        tilesMaterial.SetTexture("_VisitTex", visitTex);
         tilesMaterial.SetFloat("_StartTime", Time.time);
 
         gameObject.SetActive(true);
     }
     public void Hide() {
         gameObject.SetActive(false);
-    }
-
-    private void OnDestroy() {
-        if (visitOrderBuffer != null)
-            visitOrderBuffer.Release();
     }
 
     public void SetSpeed(int preset) {

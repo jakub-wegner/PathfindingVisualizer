@@ -15,6 +15,6 @@ public class MapGrid : MonoBehaviour {
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
         meshRenderer.material = gridMaterial;
-        gridMaterial.SetFloat("_MapSize", Map.mapSize);
+        gridMaterial.SetFloat("_MapSize", Map.size);
     }
 }

@@ -7,7 +7,7 @@ public class PathfindingNode {
     public bool obstacle;
     public List<PathfindingNode> neighbors;
 
-    public int index => z * Map.mapSize + x;
+    public int index => z * Map.size + x;
 
     public PathfindingNode(int x, int z) {
         this.x = x;

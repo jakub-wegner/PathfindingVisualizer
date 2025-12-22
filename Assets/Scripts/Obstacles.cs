@@ -22,7 +22,7 @@ public class Obstacles : MonoBehaviour {
             Vector3 pos;
             bool used;
             do {
-                pos = new Vector3(Random.Range(0, Map.mapSize), 0f, Random.Range(0, Map.mapSize));
+                pos = new Vector3(Random.Range(0, Map.size), 0f, Random.Range(0, Map.size));
                 used = false;
                 for (int j = 0; j < i; j++)
                     if (obstacles[j] == pos) {
